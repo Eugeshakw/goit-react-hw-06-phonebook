@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import style from './contactform.module.scss';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
