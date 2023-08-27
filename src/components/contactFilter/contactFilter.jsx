@@ -11,6 +11,7 @@ const ContactFilter = () => {
   const handleFilterChange = (e) => {
     dispatch(updateFilter(e.target.value));
   }
+  
     return (
         <div>
       <input

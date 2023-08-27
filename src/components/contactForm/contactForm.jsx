@@ -3,14 +3,14 @@ import React from 'react';
 import style from './contactform.module.scss';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import {createContact, updateFilter} from '../redux/createSlice'
+import {createContact} from '../redux/createSlice'
 
 const Contactform = () => {
   
  const dispatch = useDispatch()
+ 
  const contacts = useSelector(state => state.contacts)
  
-
  console.log(contacts);
     const onSubmitFrom = (e) => {
       e.preventDefault();
@@ -33,7 +33,6 @@ const Contactform = () => {
      
     } 
 
-   
   return (
     <>
       <form className={style.formContainer} onSubmit={onSubmitFrom} >
@@ -62,9 +61,6 @@ const Contactform = () => {
           required
           className={style.inpNumber}
           id="number"
-          
-          
-          
         />
 
         <button type="submit" className={style.btnSubmit}>

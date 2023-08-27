@@ -8,7 +8,7 @@ export const App = () =>  {
         <h1 style={{ fontSize: '24px', color: 'blue', textAlign: 'center' }}>
           Phonebook
         </h1>
-        <Contactform  />
+        <Contactform />
         <h2>Contacts</h2>
         <ContactFilter/>
         <Contactslist/>
