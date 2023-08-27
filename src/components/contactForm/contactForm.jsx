@@ -1,46 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import style from './contactform.module.scss';
-const Contactform = ({onAddContact}) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import {createContact} from '../redux/createSlice'
 
-  const handleChange = event => {
-    // console.log(event.target.name);
-    const { name, value } = event.target;
-    switch (name) {
-      case 'number':
-        setNumber(value);
-        break;
-      case 'name':
-        setName(value);
-        break;
+const Contactform = () => {
+  
+ const dispatch = useDispatch()
+ 
+ const contacts = useSelector(state => state.contacts)
 
-      default:
-        alert('Please enter number');
-        return;
+ console.log(contacts);
+    const onSubmitFrom = (e) => {
+      e.preventDefault();
+      const number = e.target.number.value;
+      const name = e.target.name.value;
+      
+      if (number === ''){
+        alert('Please enter a number');
+          return
+      } else if (contacts.some(
+        contact => 
+        contact.number.toLowerCase() === number.toLowerCase() || 
+        contact.name.toLowerCase() === name.toLowerCase())){
+          alert(`${name} or entered number is already in contacts.`);
+          return;
+        }
+        
+      e.target.reset();
+      dispatch(createContact({ name, number, id: nanoid() }));
+      
     }
-  };
-
-  const onSubmitForm = event => {
-    event.preventDefault();
-
-    // if (number === '') {
-    //   alert('Please enter number');
-    //   return ;
-
-    // }
-    onAddContact({name, number});
-    setName('');
-    setNumber('');
 
 
-    // this.props.onAddContact(name, number);
-  };
 
+
+    
+    
+    
   return (
     <>
-      <form className={style.formContainer} onSubmit={onSubmitForm}>
+      <form className={style.formContainer} onSubmit={onSubmitFrom} >
         <label className={style.labName} htmlFor="name">
           Name
         </label>
@@ -51,8 +52,8 @@ const Contactform = ({onAddContact}) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           id="name"
-          value={name}
-          onChange={handleChange}
+          
+          
         />
 
         <label className={style.labNumber} htmlFor="number">
@@ -66,8 +67,8 @@ const Contactform = ({onAddContact}) => {
           required
           className={style.inpNumber}
           id="number"
-          value={number}
-          onChange={handleChange}
+          
+          
         />
 
         <button type="submit" className={style.btnSubmit}>
@@ -79,6 +80,4 @@ const Contactform = ({onAddContact}) => {
 };
 export default Contactform;
 
-Contactform.propTypes = {
-  onAddContact: PropTypes.func.isRequired,
-};
+
