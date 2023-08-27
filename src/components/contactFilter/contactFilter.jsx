@@ -1,15 +1,16 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateFilter } from '../redux/createSlice';
 
 const ContactFilter = () => {
   const dispatch = useDispatch();
 
-  const handleFilterChange = event => {
-    const newFilter = event.target.value;
-    dispatch(updateFilter(newFilter)); 
-  };
+  const filter = useSelector(state => state.filter); 
+
+  const handleFilterChange = (e) => {
+    dispatch(updateFilter(e.target.value));
+  }
     return (
         <div>
       <input
@@ -20,7 +21,7 @@ const ContactFilter = () => {
         id="filter"
         name="filter"
         onChange={handleFilterChange}
-        
+        value={filter}
         required
       />
       <label
