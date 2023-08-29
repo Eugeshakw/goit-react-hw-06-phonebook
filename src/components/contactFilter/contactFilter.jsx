@@ -6,7 +6,8 @@ import { updateFilter } from '../redux/createSlice';
 const ContactFilter = () => {
   const dispatch = useDispatch();
 
-  const filter = useSelector(state => state.filter); 
+  const filter = useSelector(state => state.contactReducerUppdate); 
+  
 
   const handleFilterChange = (e) => {
     dispatch(updateFilter(e.target.value));

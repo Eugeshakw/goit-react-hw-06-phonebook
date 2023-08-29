@@ -9,7 +9,7 @@ const Contactform = () => {
   
  const dispatch = useDispatch()
  
- const contacts = useSelector(state => state.contacts)
+ const contacts = useSelector(state => state.contacts.contacts)
  
  console.log(contacts);
     const onSubmitFrom = (e) => {
